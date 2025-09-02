@@ -1,0 +1,37 @@
+# application.yaml
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=SistemaReparaciones;encrypt=false
+    username: SA
+    password: 123456
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 10
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: true
+    show-sql: true
+
+  sql:
+    init:
+      mode: always
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# Logging configuration
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.tuapp.reparaciones: DEBUG
+  file:
+    name: logs/app.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
