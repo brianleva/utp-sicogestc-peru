@@ -1,9 +1,7 @@
 package utp.com.pe.utp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +10,16 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "TipoReporte")
-public class TipoReporte {
+@Table(name = "TipoEquipo")
+public class TipoEquipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTipoReporte;
+    private Long idTipoEquipo;
 
     @Column(name = "nombre", length = 50, nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion", length = 255)
-    private String descripcion;
-
     @OneToMany(mappedBy = "tipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Reporte> reportes = new ArrayList<>();
+    private List<Equipo> equipos = new ArrayList<>();
 }

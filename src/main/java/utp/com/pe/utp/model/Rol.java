@@ -10,21 +10,18 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "TipoReporte")
-public class TipoReporte {
+@NoArgsConstructor
+@Table(name = "Rol")
+public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTipoReporte;
+    private Long idRol;
 
     @Column(name = "nombre", length = 50, nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion", length = 255)
-    private String descripcion;
-
-    @OneToMany(mappedBy = "tipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Reporte> reportes = new ArrayList<>();
+    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Usuario> usuarios = new ArrayList<>();
 }

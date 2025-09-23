@@ -24,14 +24,3 @@ server:
   port: 8080
   servlet:
     context-path: /api
-
-# Logging configuration
-logging:
-  level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    com.tuapp.reparaciones: DEBUG
-  file:
-    name: logs/app.log
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
