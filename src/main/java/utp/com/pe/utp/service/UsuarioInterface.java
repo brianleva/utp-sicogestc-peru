@@ -10,5 +10,7 @@ public interface UsuarioInterface {
     UsuarioDTO crearUsuario(UsuarioCreateDTO dto);
     UsuarioDTO patchUsuario(Integer id, UsuarioPatchDTO dto);
     List<UsuarioDTO> listarUsuarios();
+    UsuarioDTO obtenerUsuarioPorId(Integer id);
+
 
 }

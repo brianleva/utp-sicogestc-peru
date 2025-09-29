@@ -72,4 +72,11 @@ public class UsuarioInterfaceImpl implements UsuarioInterface {
                 .map(UsuarioMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public UsuarioDTO obtenerUsuarioPorId(Integer id) {
+        Usuario usuario = usuarioRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+        return UsuarioMapper.toDTO(usuario);
+    }
 }
