@@ -1,12 +1,14 @@
 package utp.com.pe.utp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import utp.com.pe.utp.model.TipoEquipo;
 import utp.com.pe.utp.repository.TipoEquipoRepository;
 import utp.com.pe.utp.service.TipoEquipoInterface;
 
 import java.util.List;
 
+@Service
 public class TipoEquipoInterfaceImpl implements TipoEquipoInterface {
 
     @Autowired

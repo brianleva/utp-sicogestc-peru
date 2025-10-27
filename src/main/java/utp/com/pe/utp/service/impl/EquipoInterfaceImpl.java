@@ -1,6 +1,7 @@
 package utp.com.pe.utp.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import utp.com.pe.utp.dto.EquipoCreateDTO;
 import utp.com.pe.utp.dto.EquipoDTO;
 import utp.com.pe.utp.dto.EquipoPatchDTO;
@@ -17,6 +18,7 @@ import utp.com.pe.utp.util.EquipoMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class EquipoInterfaceImpl implements EquipoInterface {
 
     @Autowired
