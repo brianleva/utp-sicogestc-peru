@@ -8,6 +8,7 @@ import utp.com.pe.utp.service.EstadoInterface;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/estados")
 public class EstadoController {

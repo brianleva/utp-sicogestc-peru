@@ -1,0 +1,767 @@
+openapi: 3.0.3
+info:
+  title: API SistemaReparaciones
+  description: API REST para gestión de usuarios, clientes, órdenes, repuestos y reportes
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+
+paths:
+  /usuarios:
+    get:
+      summary: Listar todos los usuarios
+      tags: [Usuario]
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+    post:
+      summary: Crear nuevo usuario
+      tags: [Usuario]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioCreate'
+      responses:
+        '201':
+          description: Usuario creado
+
+  /usuarios/{id}:
+    get:
+      summary: Obtener usuario por ID
+      tags: [Usuario]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+    patch:
+      summary: Actualizar parcialmente un usuario
+      tags: [Usuario]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioPatch'
+      responses:
+        '200':
+          description: Usuario actualizado
+
+  /clientes:
+    get:
+      summary: Listar todos los clientes
+      tags: [Cliente]
+      responses:
+        '200':
+          description: Lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+    post:
+      summary: Crear nuevo cliente
+      tags: [Cliente]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Cliente creado
+
+  /clientes/{id}:
+    get:
+      summary: Obtener cliente por ID
+      tags: [Cliente]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+    patch:
+      summary: Actualizar parcialmente un cliente
+      tags: [Cliente]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientePatch'
+      responses:
+        '200':
+          description: Cliente actualizado
+
+  /roles:
+    get:
+      summary: Listar roles
+      tags: [Rol]
+      responses:
+        '200':
+          description: Lista de roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rol'
+    post:
+      summary: Crear rol
+      tags: [Rol]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rol'
+      responses:
+        '201':
+          description: Rol creado
+
+  /tipo-equipo:
+    get:
+      summary: Listar tipos de equipo
+      tags: [TipoEquipo]
+      responses:
+        '200':
+          description: Lista de tipos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoEquipo'
+    post:
+      summary: Crear tipo de equipo
+      tags: [TipoEquipo]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoEquipo'
+      responses:
+        '201':
+          description: Tipo creado
+
+  /equipos:
+    get:
+      summary: Listar equipos
+      tags: [Equipo]
+      responses:
+        '200':
+          description: Lista de equipos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipo'
+    post:
+      summary: Registrar equipo
+      tags: [Equipo]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipo'
+      responses:
+        '201':
+          description: Equipo registrado
+
+  /equipos/{id}:
+    patch:
+      summary: Actualizar parcialmente equipo
+      tags: [Equipo]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EquipoPatch'
+      responses:
+        '200':
+          description: Equipo actualizado
+
+  /estados:
+    get:
+      summary: Listar estados
+      tags: [Estado]
+      responses:
+        '200':
+          description: Lista de estados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Estado'
+    post:
+      summary: Crear estado
+      tags: [Estado]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Estado'
+      responses:
+        '201':
+          description: Estado creado
+
+  /estados/{id}:
+    patch:
+      summary: Actualizar parcialmente estado
+      tags: [Estado]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadoPatch'
+      responses:
+        '200':
+          description: Estado actualizado
+
+  /ordenes:
+    get:
+      summary: Listar órdenes
+      tags: [OrdenServicio]
+      responses:
+        '200':
+          description: Lista de órdenes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrdenServicio'
+    post:
+      summary: Crear orden
+      tags: [OrdenServicio]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrdenServicioCreate'
+      responses:
+        '201':
+          description: Orden creada
+
+  /ordenes/{id}:
+    get:
+      summary: Obtener orden por ID
+      tags: [OrdenServicio]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Orden encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdenServicio'
+    patch:
+      summary: Actualizar parcialmente orden
+      tags: [OrdenServicio]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrdenServicioPatch'
+      responses:
+        '200':
+          description: Orden actualizada
+
+  /ordenes/{id}/repuestos:
+    get:
+      summary: Listar repuestos de una orden
+      tags: [OrdenRepuesto]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de repuestos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrdenRepuesto'
+    post:
+      summary: Agregar repuesto a orden
+      tags: [OrdenRepuesto]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrdenRepuestoCreate'
+      responses:
+        '201':
+          description: Repuesto agregado
+
+  /repuestos:
+    get:
+      summary: Listar repuestos
+      tags: [Repuesto]
+      responses:
+        '200':
+          description: Lista de repuestos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Repuesto'
+  /repuestos/{id}:
+    get:
+      summary: Obtener repuesto por ID
+      tags: [Repuesto]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Repuesto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Repuesto'
+    patch:
+      summary: Actualizar parcialmente repuesto
+      tags: [Repuesto]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepuestoPatch'
+      responses:
+        '200':
+          description: Repuesto actualizado
+
+  /metodos-pago:
+    get:
+      summary: Listar métodos de pago
+      tags: [MetodoPago]
+      responses:
+        '200':
+          description: Lista de métodos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MetodoPago'
+    post:
+      summary: Crear método de pago
+      tags: [MetodoPago]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetodoPago'
+      responses:
+        '201':
+          description: Método creado
+
+  /tipos-reporte:
+    get:
+      summary: Listar tipos de reporte
+      tags: [TipoReporte]
+      responses:
+        '200':
+          description: Lista de tipos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoReporte'
+    post:
+      summary: Crear tipo de reporte
+      tags: [TipoReporte]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoReporte'
+      responses:
+        '201':
+          description: Tipo creado
+
+  /reportes:
+    get:
+      summary: Listar reportes
+      tags: [Reporte]
+      responses:
+        '200':
+          description: Lista de reportes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reporte'
+    post:
+      summary: Crear reporte
+      tags: [Reporte]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReporteCreate'
+      responses:
+        '201':
+          description: Reporte creado
+
+  /reportes/{id}:
+    get:
+      summary: Obtener reporte por ID
+      tags: [Reporte]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Reporte encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporte'
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        email:
+          type: string
+        rol:
+          $ref: '#/components/schemas/Rol'
+
+    UsuarioCreate:
+      type: object
+      required: [nombre, email, password, rolId]
+      properties:
+        nombre:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        rolId:
+          type: integer
+
+    UsuarioPatch:
+      type: object
+      properties:
+        nombre:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        rolId:
+          type: integer
+
+    Cliente:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        telefono:
+          type: string
+        email:
+          type: string
+        direccion:
+          type: string
+
+    ClientePatch:
+      type: object
+      properties:
+        nombre:
+          type: string
+        telefono:
+          type: string
+        email:
+          type: string
+        direccion:
+          type: string
+
+    Rol:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+
+    TipoEquipo:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+
+    Equipo:
+      type: object
+      properties:
+        id:
+          type: integer
+        numeroSerie:
+          type: string
+        marca:
+          type: string
+        modelo:
+          type: string
+        tipoId:
+          type: integer
+        clienteId:
+          type: integer
+
+    EquipoPatch:
+      type: object
+      properties:
+        marca:
+          type: string
+        modelo:
+          type: string
+
+    Estado:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        descripcion:
+          type: string
+
+    EstadoPatch:
+      type: object
+      properties:
+        nombre:
+          type: string
+        descripcion:
+          type: string
+
+    OrdenServicio:
+      type: object
+      properties:
+        id:
+          type: integer
+        numeroOrden:
+          type: string
+        codigoSeguimiento:
+          type: string
+        fechaRecepcion:
+          type: string
+          format: date-time
+        fechaEntrega:
+          type: string
+          format: date-time
+        estadoId:
+          type: integer
+        fallaReportada:
+          type: string
+        diagnostico:
+          type: string
+        costoEstimado:
+          type: number
+        costoFinal:
+          type: number
+        equipoId:
+          type: integer
+        tecnicoId:
+          type: integer
+
+    OrdenServicioCreate:
+      allOf:
+        - $ref: '#/components/schemas/OrdenServicio'
+
+    OrdenServicioPatch:
+      type: object
+      properties:
+        estadoId:
+          type: integer
+        diagnostico:
+          type: string
+        costoFinal:
+          type: number
+
+    Repuesto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        codigo:
+          type: string
+        precio:
+          type: number
+        stock:
+          type: integer
+
+    RepuestoPatch:
+      type: object
+      properties:
+        precio:
+          type: number
+        stock:
+          type: integer
+
+    OrdenRepuesto:
+      type: object
+      properties:
+        id:
+          type: integer
+        repuestoId:
+          type: integer
+        cantidad:
+          type: integer
+        subtotal:
+          type: number
+
+    OrdenRepuestoCreate:
+      type: object
+      required: [repuestoId, cantidad]
+      properties:
+        repuestoId:
+          type: integer
+        cantidad:
+          type: integer
+
+    MetodoPago:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+
+    TipoReporte:
+      type: object
+      properties:
+        id:
+          type: integer
+        nombre:
+          type: string
+        descripcion:
+          type: string
+
+    Reporte:
+      type: object
+      properties:
+        id:
+          type: integer
+        tipoId:
+          type: integer
+        fechaGeneracion:
+          type: string
+          format: date-time
+        datos:
+          type: string
+        usuarioId:
+          type: integer
+
+    ReporteCreate:
+      allOf:
+        - $ref: '#/components/schemas/Reporte'

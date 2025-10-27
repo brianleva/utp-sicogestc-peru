@@ -11,6 +11,7 @@ import utp.com.pe.utp.service.ClienteInterface;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {

@@ -8,6 +8,7 @@ import utp.com.pe.utp.service.EquipoInterface;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/equipos")
 public class EquipoController {
