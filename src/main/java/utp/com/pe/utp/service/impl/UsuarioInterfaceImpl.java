@@ -46,7 +46,9 @@ public class UsuarioInterfaceImpl implements UsuarioInterface {
         Usuario usuario = usuarioRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
-        if (dto.getNombre() != null) usuario.setNombre(dto.getNombre());
+        if (dto.getNombre() != null) {
+            usuario.setNombre(dto.getNombre());
+        }
         if (dto.getEmail() != null) {
             Optional<Usuario> existente = usuarioRepo.findByEmail(dto.getEmail());
             if (existente.isPresent() && !existente.get().getIdUsuario().equals(id)) {
@@ -54,7 +56,9 @@ public class UsuarioInterfaceImpl implements UsuarioInterface {
             }
             usuario.setEmail(dto.getEmail());
         }
-        if (dto.getPassword() != null) usuario.setPassword(dto.getPassword());
+        if (dto.getPassword() != null){
+            usuario.setPassword(dto.getPassword());
+        }
 
         if (dto.getRolId() != null) {
             Rol rol = rolRepo.findById(dto.getRolId())
